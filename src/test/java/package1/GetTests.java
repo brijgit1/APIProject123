@@ -33,7 +33,7 @@ public void getListOfUsersQueryParam() {
 	RestAssured.basePath="/api/users";
 	RequestSpecification reqSpec=RestAssured.given();
 	reqSpec.queryParam("page", 2);
-	String respInString=RestAssured.get().body().asString();
+	String respInString=reqSpec.get().body().asString();
 	System.out.println(respInString);
 }
 
@@ -43,7 +43,7 @@ public void getListOfUsersAssertBody() {
 	RestAssured.basePath="/api/users";
 	RequestSpecification reqSpec=RestAssured.given();
 	reqSpec.queryParam("page", 2);
-	RestAssured.get().then().assertThat().statusCode(200);
+	reqSpec.get().then().assertThat().statusCode(200);
 }
 
 @Test
@@ -54,7 +54,7 @@ public void getListOfUsersAssertBody1() {
 	//reqSpec.contentType(ContentType.JSON);
 	reqSpec.headers("content-type","application/json");
 	reqSpec.queryParam("page", 2);
-	RestAssured.get().then().log().all();
+	reqSpec.get().then().log().all();
 }
 
 @Test
